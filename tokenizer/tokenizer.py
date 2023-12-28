@@ -5,29 +5,24 @@ model_name = "bert-base-cased"
 model = BertModel.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-sentence = "When life gives you lemons, don't make lemonade."
-sentence2 = sentence.replace("don't ", "")
+test_sentence = "Artificial intelligence is revolutionizing the way we live."
 
-tokens = tokenizer.tokenize(sentence)
+tokens = tokenizer.tokenize(test_sentence)
 
 vocab = tokenizer.vocab
 vocab_df = pd.DataFrame({"token": vocab.keys(), "token_id": vocab.values()})
 vocab_df = vocab_df.sort_values(by="token_id").set_index("token_id")
 
-token_ids = tokenizer.encode(sentence)
+token_ids = tokenizer.encode(test_sentence)
 
-len(tokens)
-len(token_ids)
+print("Tokens:", tokens)
+print("Token IDs:", token_ids)
 
-vocab_df.iloc[101]
-vocab_df.iloc[102]
+print("Token at index 101:", vocab_df.iloc[101])
+print("Token at index 102:", vocab_df.iloc[102])
 
-list(zip(tokens, token_ids[1:-1]))
-tokenizer.decode(token_ids[1:-1])
+print("Zipped Tokens and Token IDs:", list(zip(tokens, token_ids[1:-1])))
 
-tokenizer_out = tokenizer(sentence)
-tokenizer_out2 = tokenizer([sentence, sentence2], padding=True)
-
-tokenizer.decode(tokenizer_out2["input_ids"][0])
-tokenizer.decode(tokenizer_out2["input_ids"][1])
+decoded_sentence = tokenizer.decode(token_ids[1:-1])
+print("Decoded Sentence:", decoded_sentence)
 
