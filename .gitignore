@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#venv for this project
+*/transformerEnv
+
 # C extensions
 *.so
 
